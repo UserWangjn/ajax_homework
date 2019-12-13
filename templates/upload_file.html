@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/static/ajax_setup.js"></script>
+</head>
+<body>
+<input id="f1" type="file" name="f1">
+<button id="b1">提交</button>
+</body>
+<script>
+    $('#b1').click(function () {
+        var formData = new FormData();
+        {#formData.append("csrfmiddlewaretoken", $("[name='csrfmiddlewaretoken']").val());#}
+        formData.append("f1", $("#f1")[0].files[0]);
+        $.ajax({
+            url: '/upload_file/',
+            type: 'post',
+            processData: false,  // 告诉jQuery不要去处理发送的数据
+            contentType: false,  // 告诉jQuery不要去设置Content-Type请求头
+            data: formData,
+            success:function (res) {
+                console.log(res)
+            }
+        })
+    })
+</script>
+</html>
