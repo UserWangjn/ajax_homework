@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/static/ajax_setup.js"></script>
+    <style>
+        .hide{
+            display: none;
+        }
+        .color{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<p>
+    用户名:<input type="text" name="user">
+    <span id="is_regist" class="hide color">该用户已存在，不能注册</span>
+    <span id="no_regist" class="hide color">该用户可以注册</span>
+</p>
+<p>
+    昵 称:<input type="text" name="nn">
+</p>
+<button id="b1">提交</button>
+</body>
+<script>
+    $('[name="user"]').blur(function () {
+        $.ajax({
+            url: '/regist/',
+            type: 'post',
+            data:{
+                username : $('[name="user"]').val()
+            },
+            success: function (res) {
+                if (res == 'True'){
+                    {#res为True，用户已存在，不能注册#}
+                    console.log("111",res);
+                    $('#no_regist').addClass('hide');
+                    $('#is_regist').removeClass('hide');
+
+                }
+                else {
+                    {#res为False，用户不存在，可以注册#}
+                    console.log("222",res);
+                    $('#is_regist').addClass('hide');
+                    $('#no_regist').removeClass('hide');
+
+                }
+            }
+        })
+    })
+</script>
+
+</html>

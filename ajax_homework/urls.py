@@ -22,5 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url('^index/', views.index),
     url('^calc/', views.calc),
-    url('^upload_file/', views.upload_file),
+    url('^upload/', views.upload),
+    url('^regist/', views.regist),
+    url('^sweetalert/', views.sweetalert),
+    url('^sweetalert_delete/', views.sweetalert_delete),
 ]

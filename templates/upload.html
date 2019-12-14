@@ -7,21 +7,21 @@
     <script src="/static/ajax_setup.js"></script>
 </head>
 <body>
-<input id="f1" type="file" name="f1">
+<input id="my_file" type="file">
 <button id="b1">提交</button>
 </body>
 <script>
     $('#b1').click(function () {
         var formData = new FormData();
         {#formData.append("csrfmiddlewaretoken", $("[name='csrfmiddlewaretoken']").val());#}
-        formData.append("f1", $("#f1")[0].files[0]);
+        formData.append("f1", $("#my_file")[0].files[0]);
         $.ajax({
-            url: '/upload_file/',
+            url: '/upload/',
             type: 'post',
             processData: false,  // 告诉jQuery不要去处理发送的数据
             contentType: false,  // 告诉jQuery不要去设置Content-Type请求头
             data: formData,
-            success:function (res) {
+            success: function (res) {
                 console.log(res)
             }
         })
